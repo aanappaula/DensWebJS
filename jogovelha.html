@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.min.css"
+      rel="stylesheet"
+    />
+
+    <title>Trabalho JS</title>
+  </head>
+
+  <body>
+    <div class="esquerda">
+      <div class="card">
+        <div class="card-header">Motivação</div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p>
+              O jogo só termina quando você decide que terminou. Quando você se
+              entrega!
+            </p>
+            <footer class="blockquote-footer">
+              Pela internet <cite title="Source Title">Google</cite>
+            </footer>
+          </blockquote>
+        </div>
+      </div>
+      <div class="nomes">
+        <div data-mdb-input-init class="form-outline mb-4">
+          <input type="text" id="jogador1" class="form-control" />
+          <label class="form-label">Jogador 1</label>
+        </div>
+
+        <div data-mdb-input-init class="form-outline mb-4">
+          <input type="text" id="jogador2" class="form-control" />
+          <label class="form-label">Jogador 2</label>
+        </div>
+        <h1>Clique no botão para ver quem irá iniciar o jogo</h1>
+        <button
+          data-mdb-ripple-init
+          type="button"
+          class="btn btn-primary btn-block mb-4"
+          onclick="sortearJogador()"
+        >
+          Sortear
+        </button>
+      </div>
+    </div>
+
+    <div id="game" class="game">
+      <table id="gameBoard" class="table">
+        <tbody>
+          <tr>
+            <td data-index="0"></td>
+            <td data-index="1"></td>
+            <td data-index="2"></td>
+          </tr>
+          <tr>
+            <td data-index="3"></td>
+            <td data-index="4"></td>
+            <td data-index="5"></td>
+          </tr>
+          <tr>
+            <td data-index="6"></td>
+            <td data-index="7"></td>
+            <td data-index="8"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
+
+<style>
+  .card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  .nomes {
+    width: 40%;
+  }
+  button {
+    width: 120%;
+  }
+  h1 {
+    font-size: 15px;
+  }
+  .game {
+    float: right;
+    width: 40%;
+    margin-top: 150px;
+    margin-right: 100px;
+  }
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .table td {
+    width: 33%;
+    height: 100px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  .esquerda {
+    float: left;
+    width: 40%;
+    padding: 20px;
+    margin-left: 100px;
+    margin-right: 50px;
+    padding-top: 120px;
+  }
+</style>
+<script>
+  let currentPlayer = "X";
+  let board = ["", "", "", "", "", "", "", "", ""];
+
+  function sortearJogador() {
+    var jogador1 = document.getElementById("jogador1");
+    var jogador2 = document.getElementById("jogador2");
+    var opcoes = [jogador1.value, jogador2.value];
+    if (jogador1.value != "" && jogador2.value != "") {
+      alert(
+        "O jogador que vai começar é o/a " +
+          opcoes[Math.random() < 0.5 ? 0 : 1] +
+          ". Você será o " +
+          currentPlayer
+      );
+    } else if (jogador1.value == "" || jogador2.value == "") {
+      alert("Preencha todos os nomes");
+    }
+  }
+
+  function handleClick(event) {
+    const index = event.target.dataset.index;
+    if (board[index] === "" && !checkWinner()) {
+      board[index] = currentPlayer;
+      event.target.textContent = currentPlayer;
+      if (checkWinner()) {
+        alert(`Jogador ${currentPlayer} venceu!`);
+      } else if (board.every((cell) => cell !== "")) {
+        alert("Empate!");
+      } else {
+        currentPlayer = currentPlayer === "X" ? "O" : "X";
+      }
+    }
+  }
+
+  function checkWinner() {
+    const winningCombinations = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+
+    return winningCombinations.some((combination) => {
+      const [a, b, c] = combination;
+      return board[a] && board[a] === board[b] && board[a] === board[c];
+    });
+  }
+
+  document.querySelectorAll("#gameBoard td").forEach((cell) => {
+    cell.addEventListener("click", handleClick);
+  });
+</script>
