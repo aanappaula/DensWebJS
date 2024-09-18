@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif; 
+}
+
+body{
+    height: 100vh;
+    background-color: #1e1e1e;
+    color: #f0f0f0; 
+}
+
+nav.menu-lateral{
+    width: 60px; 
+    height: 100%;
+    background-color: #34322F; 
+    padding: 40px 0 40px 10px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.7); 
+    
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    transition: width 0.3s ease-in-out; 
+}
+
+nav.menu-lateral.expandir{
+    width: 250px; 
+}
+
+.btn-expandir{
+    width: 100%;
+    padding-left: 10px;
+}
+
+.btn-expandir > i{
+    color: #ff0077; 
+    font-size: 28px; 
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.btn-expandir > i:hover {
+    transform: rotate(90deg); 
+}
+
+ul{
+    height: 100%;
+    list-style: none;
+    padding-left: 0; 
+}
+
+ul li.item-menu{
+    margin-bottom: 15px; 
+    transition: background-color 0.3s ease, padding-left 0.3s ease; 
+}
+
+ul li.item-menu:hover{
+    background: #ff0077;
+    padding-left: 10px; 
+}
+
+ul li.ativo {
+    background-color: #ff0077;
+    padding-left: 10px;
+}
+
+ul li.item-menu a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 15px 0;
+    display: flex;
+    align-items: center;
+    line-height: 45px;
+    transition: color 0.3s ease; 
+}
+
+ul li.item-menu a:hover {
+    color: #fff;
+}
+
+ul li.item-menu a .txt-link{
+    margin-left: 70px;
+    opacity: 0;
+    transition: margin-left 0.3s ease, opacity 0.3s ease; 
+}
+
+nav.menu-lateral.expandir .txt-link{
+    margin-left: 20px;
+    opacity: 1;
+}
+
+ul li.item-menu a .icon > i{
+    font-size: 24px;
+    margin-left: 5px;
+    transition: color 0.3s ease;
+}
+
+ul li.item-menu:hover a .icon > i {
+    color: #fff;
+}
+

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .carrossel {
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+            overflow: hidden;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .carrossel-imagens {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carrossel-imagens img {
+            width: 100%;
+            height: auto;
+        }
+
+        button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        button.anterior {
+            left: 10px;
+        }
+
+        button.proximo {
+            right: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="carrossel">
+        <div class="carrossel-imagens">
+            <img src="https://blog.casadoprodutor.com.br/wp-content/uploads/2018/04/gatinho.jpg"/>
+            <img src="https://petitgato.com.br/img/webp/gatos-persas-em-sao-paulo-img-3780.webp" />
+        </div>
+        <button class="anterior">&#10094;</button>
+        <button class="proximo">&#10095;</button>
+    </div>
+
+    <script>
+        const botaoAnterior = document.querySelector('.anterior');
+        const botaoProximo = document.querySelector('.proximo');
+        const carrossel = document.querySelector('.carrossel-imagens');
+        const images = document.querySelectorAll('.carrossel-imagens img');
+
+        let index = 0;
+
+        function MostrarImagem(index) {
+            const offset = -index * 100;
+            carrossel.style.transform = `translateX(${offset}%)`;
+        }
+
+        botaoAnterior.addEventListener('click', () => {
+            index = (index + 1) % images.length;
+            MostrarImagem(index);
+        });
+
+        botaoProximo.addEventListener('click', () => {
+            index = (index - 1 + images.length) % images.length;
+            MostrarImagem(index);
+        });
+
+    </script>
+</body>
+</html>

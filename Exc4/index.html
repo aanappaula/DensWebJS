@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postagem do Instagram</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .post {
+            padding: 10px;
+        }
+
+        .descricao {
+            margin-top: 10px;
+        }
+
+        .div-comentario {
+            padding: 10px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input, textarea {
+            width: 90%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #0095f6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #007bbf;
+        }
+
+        .comentario {
+            border-top: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
+        .comentario strong {
+            color: #000000;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="post">
+            <img src="https://blog.casadoprodutor.com.br/wp-content/uploads/2018/04/gatinho.jpg" height="500px" width="580px"/>
+            <div class="descricao">
+                <h2>Usuário</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+        </div>
+        
+        <div class="div-comentario">
+            <form id="form-comentario">
+                <input type="text" id="usuario" placeholder="Seu nome" required>
+                <textarea id="comentario" placeholder="Escreva seu comentário..." required></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+            <h2>Comentários</h2>
+            <div id="comentarios-postados"></div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('form-comentario').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const usuario = document.getElementById('usuario').value;
+            const comentario = document.getElementById('comentario').value;
+
+            const novoComentario = { usuario, comentario };
+
+            setTimeout(() => {
+                AdicionarComentario(novoComentario);
+                document.getElementById('usuario').value = '';
+                document.getElementById('comentario').value = '';
+            }, 500);
+        });
+
+        function GerarCorAleatoria() {
+            const letters = '0123456789ABCDEF';
+            let cor = '#';
+            for (let i = 0; i < 6; i++) {
+                cor += letters[Math.floor(Math.random() * 16)];
+            }
+            return cor;
+        }
+
+        function AdicionarComentario({ usuario, comentario }) {
+            const comentariosPostados = document.getElementById('comentarios-postados');
+            const divComentario = document.createElement('div');
+            const cor = GerarCorAleatoria();
+            divComentario.classList.add('comentario');
+            divComentario.style.backgroundColor = cor;
+            divComentario.innerHTML = `<strong>${usuario}</strong>: ${comentario}`;
+            comentariosPostados.prepend(divComentario);
+        }
+
+
+    </script>
+</body>
+</html>

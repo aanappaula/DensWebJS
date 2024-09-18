@@ -1,0 +1,96 @@
+/* Reset básico para todos os elementos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Importa a fonte Poppins */
+body {
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth; /* Rolagem suave nativa */
+    line-height: 1.6;
+}
+
+/* Navegação fixa */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #333; /* Cor escura para o menu */
+    padding: 15px 0;
+    text-align: center;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #ff6347; /* Cor de destaque ao passar o mouse */
+}
+
+/* Estilos para o conteúdo */
+.content {
+    padding-top: 80px; /* Ajuste para o espaço do menu fixo */
+}
+
+/* Seções da página */
+section {
+    padding: 100px 20px;
+    min-height: 100vh;
+    border-bottom: 2px solid #ddd;
+}
+
+/* Cores para cada seção, inspiradas no menu anterior */
+#inicio {
+    background-color: #ffecd2; /* Cor suave */
+}
+
+#sobre {
+    background-color: #f4e2d8; /* Cor suave */
+}
+
+#servicos {
+    background-color: #c9d6ff; /* Cor suave */
+}
+
+#contato {
+    background-color: #a1c4fd; /* Cor suave */
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 18px;
+    font-weight: 300;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    nav ul li {
+        margin: 0 10px;
+    }
+    nav ul li a {
+        font-size: 16px;
+    }
+}
